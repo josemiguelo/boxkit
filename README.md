@@ -48,7 +48,6 @@ jobs:
 
 **Note:** 
 - You can choose to only generate a single custom image if you want. 
-- You can remove the boxkit and fedora-example images provided in the boxkit repo and only generate your own custom images.
 - The `scripts/` and `packages/` folders are optional, you can generate your custom images without them, but they are highly recommended to use.
 - The name of your custom image and ContainerFile **MUST** be the same. <br>
 
