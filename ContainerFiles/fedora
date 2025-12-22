@@ -5,11 +5,9 @@ LABEL com.github.containers.toolbox="true" \
       summary="My custom image for distrobox" \
       maintainer="josemiguelo.ochoa@gmail.com"
 
-# Copy the setup scripts and package list
-COPY ../scripts/fedora.sh /
-COPY ../scripts/set-distrobox-shims.sh /
-COPY ../packages/fedora.packages /
+COPY ../scripts/ /tmp/scripts/
+COPY ../packages/ /tmp/packages/
 
-# Run the setup scripts
-RUN chmod +x fedora.sh set-distrobox-shims.sh && /fedora.sh
-RUN rm /fedora.sh /set-distrobox-shims.sh /fedora.packages
+RUN chmod +x /tmp/scripts/*.sh && \
+    /tmp/scripts/fedora.sh && \
+    rm -rf /tmp/scripts /tmp/packages
