@@ -4,5 +4,8 @@
 ./set-distrobox-shims.sh
 
 # Update the container and install packages
-dnf update -y
-grep -v '^#' ./fedora.packages | xargs dnf install -y
+dnf5 update -y
+grep -v '^#' ./fedora.packages | xargs dnf5 install -y
+
+# set asdf
+./set-asdf.sh
