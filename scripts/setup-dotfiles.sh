@@ -1,14 +1,13 @@
 #!/bin/sh
 
-# Install chezmoi if it's not there (this can stay in the build script)
-if ! command -v chezmoi >/dev/null 2>&1; then
-  sudo dnf5 install -y chezmoi
-fi
+# Distrobox entry can be fast; ensure the home dir is actually mounted
+sleep 20
 
-# Only init if the source directory doesn't exist
-if [ ! -d "$HOME/.local/share/chezmoi" ]; then
-  echo "Configuring dotfiles for $USER..."
-  chezmoi init --apply --verbose https://github.com/josemiguelo/.dotfiles.git
-else
-  echo "Dotfiles already initialized."
+# Only run if we are NOT root (ensures it goes to your user)
+if [ "$(id -u)" -ne 0 ]; then
+  if [ ! -d "$HOME/.local/share/chezmoi" ]; then
+    echo "🚀 Initializing dotfiles in isolated home: $HOME"
+    # --force handles cases where Distrobox might have created dummy config files
+    chezmoi init --apply --verbose --force https://github.com/josemiguelo/.dotfiles.git
+  fi
 fi
