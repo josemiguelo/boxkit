@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ouex pipefail
+
 if [ ! -d "$HOME/.local/share/chezmoi" ]; then
   echo "🚀 Initializing dotfiles in isolated home: $HOME"
   sudo chown -R $USER:$USER "$HOME/.local"

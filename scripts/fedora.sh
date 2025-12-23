@@ -1,8 +1,6 @@
 #!/bin/sh
 
-# Symlink distrobox shims
-/tmp/scripts/set-distrobox-shims.sh
+set -ouex pipefail
 
-# Update the container and install packages
-dnf5 update -y
-grep -v '^#' /tmp/packages/fedora.packages | xargs dnf5 install -y
+/tmp/scripts/set-distrobox-shims.sh
+/tmp/scripts/install-dnf-packages.sh
