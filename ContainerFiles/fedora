@@ -5,8 +5,12 @@ LABEL com.github.containers.toolbox="true" \
       summary="My custom image for distrobox" \
       maintainer="josemiguelo.ochoa@gmail.com"
 
+# temp assets
 COPY ../scripts/ /tmp/scripts/
 COPY ../packages/ /tmp/packages/
+
+# persisted assets
+COPY ../scripts/setup-dotfiles.sh /usr/local/bin/setup-dotfiles.sh
 
 RUN chmod +x /tmp/scripts/*.sh && \
     /tmp/scripts/fedora.sh && \
