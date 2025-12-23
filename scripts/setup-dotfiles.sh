@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Distrobox entry can be fast; ensure the home dir is actually mounted
-sleep 20
-
 # Only run if we are NOT root (ensures it goes to your user)
 if [ "$(id -u)" -ne 0 ]; then
   if [ ! -d "$HOME/.local/share/chezmoi" ]; then

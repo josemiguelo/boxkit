@@ -11,6 +11,7 @@ COPY ../packages/ /tmp/packages/
 
 # persisted assets
 COPY ../scripts/setup-dotfiles.sh /usr/local/bin/setup-dotfiles.sh
+RUN chmod +x /usr/local/bin/setup-dotfiles.sh
 
 RUN chmod +x /tmp/scripts/*.sh && \
     /tmp/scripts/fedora.sh && \
