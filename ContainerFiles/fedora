@@ -13,6 +13,7 @@ COPY ../packages/ /tmp/packages/
 RUN mkdir -p /etc/skel/.local/bin
 COPY ../scripts/setup-dotfiles.sh /etc/skel/.local/bin/setup-dotfiles.sh
 RUN chmod +x /etc/skel/.local/bin/setup-dotfiles.sh
+RUN chmod -R 755 /etc/skel/.local
 
 RUN chmod +x /tmp/scripts/*.sh && \
     /tmp/scripts/fedora.sh && \
