@@ -45,3 +45,9 @@ distrobox enter boxkit-fedora
 ```bash
 cd ~/Distroboxes/boxkit-fedora && ./.local/bin/setup-dotfiles.sh
 ```
+
+This will:
+1. download and set up chezmoi dotfiles
+2. install asdf plugins and tools
+
+By default, it will install all tools defined in [~/.tool-versions](https://github.com/josemiguelo/.dotfiles/blob/master/dot_tool-versions). If no tool is wanted to be installed, pass the env var `NO_ASDF_TOOL_INSTALLATION=true`. If you want to install just some of those tools, pass `ASDF_TOOL_LIST="golang ruby ..."`. 

@@ -52,4 +52,14 @@ echo "🚀 installed asdf-plugin-manager version $($PLUGIN_MANAGER version)"
 
 $PLUGIN_MANAGER add-all
 
-asdf install
+if [[ -n "$NO_ASDF_TOOL_INSTALLATION" ]]; then
+    echo "Skipping asdf tools installation."
+elif [[ -n "$ASDF_TOOL_LIST" ]]; then
+    echo "Installing tools for these plugins: $ASDF_TOOL_LIST"
+    for tool in $ASDF_TOOL_LIST; do
+      asdf install "$tool" || { echo "❌ Failed to install asdf tool: $tool" }
+    done
+else    
+    echo "Installing all tools from ~/.tool-versions"
+    asdf install
+fi
