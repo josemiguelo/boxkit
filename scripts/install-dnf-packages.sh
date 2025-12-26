@@ -61,6 +61,13 @@ dnf5 install -y 'dnf-command(copr)' &&
   dnf5 copr enable -y atim/starship &&
   dnf5 install -y starship
 
+##########
+## YAZI ##
+##########
+
+dnf5 copr enable -y lihaohong/yazi
+dnf5 install -y yazi
+
 ## clean everything ......
 dnf5 clean all
 echo "🚀 Installation complete!"
