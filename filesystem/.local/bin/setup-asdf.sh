@@ -57,7 +57,7 @@ if [[ -n "$NO_ASDF_TOOL_INSTALLATION" ]]; then
 elif [[ -n "$ASDF_TOOL_LIST" ]]; then
     echo "Installing tools for these plugins: $ASDF_TOOL_LIST"
     for tool in $ASDF_TOOL_LIST; do
-      asdf install "$tool" || { echo "❌ Failed to install asdf tool: $tool" }
+      asdf install "$tool" || { echo "❌ Failed to install asdf tool: $tool"; }
     done
 else    
     echo "Installing all tools from ~/.tool-versions"
