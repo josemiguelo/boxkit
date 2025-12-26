@@ -2,24 +2,12 @@
 
 set -ouex pipefail
 
+###############
+## DEV TOOLS ##
+###############
+
 dnf5 install -y @development-tools
-
-PACKAGES=(
-    # CLI Tools
-    "atuin"
-    "btop"
-    "bat"
-    "chezmoi"
-    "dbus-x11"
-    "fzf"
-    "just"
-    "make"
-    "ripgrep"
-    "wl-clipboard"
-    "zsh"
-    "zoxide"
-
-    # Development Tools
+DEV_PACKAGES=(
     "zlib-devel"
     "bzip2-devel"
     "readline-devel"
@@ -40,15 +28,39 @@ PACKAGES=(
     "ncurses-devel"
     "perl-FindBin"
 )
+echo "Installing dev packages ${#DEV_PACKAGES[@]} ..."
+dnf5 install -y "${DEV_PACKAGES[@]}"
 
-echo "Updating system and installing ${#PACKAGES[@]} items..."
+###############
+## CLI TOOLS ##
+###############
 
-dnf5 install -y "${PACKAGES[@]}"
+CLI_PACKAGES=(
+    "atuin"
+    "btop"
+    "bat"
+    "chezmoi"
+    "dbus-x11"
+    "fzf"
+    "just"
+    "make"
+    "ripgrep"
+    "wl-clipboard"
+    "zsh"
+    "zoxide"
+)
+echo "Installing cli packages ${#CLI_PACKAGES[@]} ..."
+dnf5 install -y "${CLI_PACKAGES[@]}"
+
+##############
+## STARSHIP ##
+##############
 
 dnf5 install -y 'dnf-command(copr)' && \
     dnf5 copr enable -y atim/starship && \
     dnf5 install -y starship
 
-dnf5 clean all
 
+## clean everything ......
+dnf5 clean all
 echo "🚀 Installation complete!"
