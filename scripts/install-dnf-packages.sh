@@ -48,6 +48,7 @@ CLI_PACKAGES=(
     "wl-clipboard"
     "zsh"
     "zoxide"
+    "fd-find"
 )
 echo "Installing cli packages ${#CLI_PACKAGES[@]} ..."
 dnf5 install -y "${CLI_PACKAGES[@]}"
