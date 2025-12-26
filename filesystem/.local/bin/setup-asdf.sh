@@ -13,17 +13,20 @@ BIN_DIR="$HOME/.local/bin"
 ASDF_DATA_DIR="$HOME/.asdf"
 
 if command -v asdf >/dev/null 2>&1; then
-    echo "🚀 asdf version $(asdf --version) is already installed. Skipping download."
-    exit 0
+  echo "🚀 asdf version $(asdf --version) is already installed. Skipping download."
+  exit 0
 fi
 
 echo "asdf not found. Starting installation of v${ASDF_VERSION}..."
 
 ARCH=$(uname -m)
 case ${ARCH} in
-    x86_64)  ARCH_TYPE="amd64" ;;
-    aarch64) ARCH_TYPE="arm64" ;;
-    *)       echo "Unsupported architecture: ${ARCH}"; exit 1 ;;
+x86_64) ARCH_TYPE="amd64" ;;
+aarch64) ARCH_TYPE="arm64" ;;
+*)
+  echo "Unsupported architecture: ${ARCH}"
+  exit 1
+  ;;
 esac
 
 mkdir -p "$BIN_DIR"
@@ -53,13 +56,14 @@ echo "🚀 installed asdf-plugin-manager version $($PLUGIN_MANAGER version)"
 $PLUGIN_MANAGER add-all
 
 if [[ -n "$NO_ASDF_TOOL_INSTALLATION" ]]; then
-    echo "Skipping asdf tools installation."
+  echo "Skipping asdf tools installation."
 elif [[ -n "$ASDF_TOOL_LIST" ]]; then
-    echo "Installing tools for these plugins: $ASDF_TOOL_LIST"
-    for tool in $ASDF_TOOL_LIST; do
-      asdf install "$tool" || { echo "❌ Failed to install asdf tool: $tool"; }
-    done
-else    
-    echo "Installing all tools from ~/.tool-versions"
-    asdf install
+  echo "Installing tools for these plugins: $ASDF_TOOL_LIST"
+  for tool in $ASDF_TOOL_LIST; do
+    asdf install "$tool" || { echo "❌ Failed to install asdf tool: $tool"; }
+  done
+else
+  echo "Installing all tools from ~/.tool-versions"
+  asdf install
 fi
+

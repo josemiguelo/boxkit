@@ -9,3 +9,4 @@ if [ ! -d "$HOME/.local/share/chezmoi" ]; then
 else
   echo "🚀 Dotfiles have already been initialized!"
 fi
+
