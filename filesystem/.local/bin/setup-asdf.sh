@@ -66,4 +66,3 @@ else
   echo "Installing all tools from ~/.tool-versions"
   asdf install
 fi
-
