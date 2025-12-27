@@ -70,6 +70,15 @@ dnf5 install -y yazi
 #############
 dnf5 install -y https://github.com/wezterm/wezterm/releases/download/20240203-110809-5046fc22/wezterm-20240203_110809_5046fc22-1.fedora39.x86_64.rpm
 
+############
+## VSCODE ##
+############
+rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+  echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" |
+  sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
+
+dnf5 install -y code
+
 ## clean everything ......
 dnf5 clean all
 echo "🚀 Installation complete!"
