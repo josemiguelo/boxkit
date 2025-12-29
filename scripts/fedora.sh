@@ -4,4 +4,3 @@ set -ouex pipefail
 
 /tmp/scripts/set-distrobox-shims.sh
 /tmp/scripts/install-dnf-packages.sh
-/tmp/scripts/install-fonts.sh
