@@ -14,7 +14,6 @@ ASDF_DATA_DIR="$HOME/.asdf"
 
 if command -v asdf >/dev/null 2>&1; then
   echo "🚀 asdf version $(asdf --version) is already installed. Skipping download."
-  exit 0
 fi
 
 echo "asdf not found. Starting installation of v${ASDF_VERSION}..."
@@ -55,9 +54,9 @@ echo "🚀 installed asdf-plugin-manager version $($PLUGIN_MANAGER version)"
 
 $PLUGIN_MANAGER add-all
 
-if [[ -n "$NO_ASDF_TOOL_INSTALLATION" ]]; then
+if [[ "${NO_ASDF_TOOL_INSTALLATION:-}" == "true" ]]; then
   echo "Skipping asdf tools installation."
-elif [[ -n "$ASDF_TOOL_LIST" ]]; then
+elif [[ -n "${ASDF_TOOL_LIST:-}" ]]; then
   echo "Installing tools for these plugins: $ASDF_TOOL_LIST"
   for tool in $ASDF_TOOL_LIST; do
     asdf install "$tool" || { echo "❌ Failed to install asdf tool: $tool"; }
