@@ -73,11 +73,11 @@ dnf5 install -y https://github.com/wezterm/wezterm/releases/download/20240203-11
 ############
 ## VSCODE ##
 ############
-rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
-  echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" |
-  sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
-
-dnf5 install -y code
+# rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+#   echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" |
+#   sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
+#
+# dnf5 install -y code
 
 ## clean everything ......
 dnf5 clean all
