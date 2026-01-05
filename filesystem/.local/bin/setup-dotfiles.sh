@@ -2,7 +2,8 @@
 
 set -ouex pipefail
 
+. setup-git.sh
 . download-chezmoi-dotfiles.sh
-. setup-asdf.sh
-. export-apps.sh
 . install-fonts.sh
+. export-apps.sh
+. setup-asdf.sh
