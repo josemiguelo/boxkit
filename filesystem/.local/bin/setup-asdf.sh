@@ -14,33 +14,33 @@ ASDF_DATA_DIR="$HOME/.asdf"
 
 if command -v asdf >/dev/null 2>&1; then
   echo "🚀 asdf version $(asdf --version) is already installed. Skipping download."
+else
+  echo "asdf not found. Starting installation of v${ASDF_VERSION}..."
+
+  ARCH=$(uname -m)
+  case ${ARCH} in
+  x86_64) ARCH_TYPE="amd64" ;;
+  aarch64) ARCH_TYPE="arm64" ;;
+  *)
+    echo "Unsupported architecture: ${ARCH}"
+    exit 1
+    ;;
+  esac
+
+  mkdir -p "$BIN_DIR"
+  mkdir -p "$ASDF_DATA_DIR"/{installs,plugins,shims}
+
+  URL="https://github.com/asdf-vm/asdf/releases/download/v${ASDF_VERSION}/asdf-v${ASDF_VERSION}-linux-${ARCH_TYPE}.tar.gz"
+
+  echo "Downloading from: ${URL}"
+  curl -sSL "$URL" | tar -xz -C "$BIN_DIR" asdf
+
+  chmod +x "${BIN_DIR}/asdf"
+  chmod -R 777 "$ASDF_DATA_DIR"
+
+  echo "🚀 Installation complete. asdf binary placed in ${BIN_DIR}/asdf."
+  echo "version $(asdf --version)"
 fi
-
-echo "asdf not found. Starting installation of v${ASDF_VERSION}..."
-
-ARCH=$(uname -m)
-case ${ARCH} in
-x86_64) ARCH_TYPE="amd64" ;;
-aarch64) ARCH_TYPE="arm64" ;;
-*)
-  echo "Unsupported architecture: ${ARCH}"
-  exit 1
-  ;;
-esac
-
-mkdir -p "$BIN_DIR"
-mkdir -p "$ASDF_DATA_DIR"/{installs,plugins,shims}
-
-URL="https://github.com/asdf-vm/asdf/releases/download/v${ASDF_VERSION}/asdf-v${ASDF_VERSION}-linux-${ARCH_TYPE}.tar.gz"
-
-echo "Downloading from: ${URL}"
-curl -sSL "$URL" | tar -xz -C "$BIN_DIR" asdf
-
-chmod +x "${BIN_DIR}/asdf"
-chmod -R 777 "$ASDF_DATA_DIR"
-
-echo "🚀 Installation complete. asdf binary placed in ${BIN_DIR}/asdf."
-echo "version $(asdf --version)"
 
 #############
 ## PLUGINS ##
