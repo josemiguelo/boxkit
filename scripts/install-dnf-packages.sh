@@ -48,6 +48,7 @@ CLI_PACKAGES=(
   "zoxide"
   "fd-find"
   "trash-cli"
+  "vim"
 )
 echo "Installing cli packages ${#CLI_PACKAGES[@]} ..."
 dnf5 install -y "${CLI_PACKAGES[@]}"

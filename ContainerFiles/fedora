@@ -1,4 +1,4 @@
-FROM quay.io/fedora/fedora-toolbox:latest
+FROM quay.io/fedora/fedora-toolbox:44
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
@@ -13,6 +13,9 @@ RUN mkdir -p /etc/skel/.local/bin
 COPY ../filesystem/.local/bin/ /etc/skel/.local/bin/
 RUN chmod +x /etc/skel/.local/bin/*.sh
 RUN chmod -R 755 /etc/skel/.local
+
+# copy zsh barebones config
+COPY ../filesystem/.zshenv /etc/skel/.zshenv
 
 RUN chmod +x /tmp/scripts/*.sh && \
     /tmp/scripts/fedora.sh && \
