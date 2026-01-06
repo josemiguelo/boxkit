@@ -26,18 +26,17 @@ SHELL=/bin/zsh distrobox create \
 For iterating faster, remove the box's home directory and stop everything first:
 
 ```bash
-cd ~/Distroboxes && \
-sudo rm -rf ./boxkit-fedora/ ; \
+sudo rm -rf ~/Distroboxes/boxkit-fedora/ ; \
 distrobox stop boxkit-fedora -Y ; \
 distrobox rm boxkit-fedora -f
 ```
 
 Note: the code above uses the locally-built image. After iterating and pushing the changes to Github, ghcr is the registry you want to pull images from. Replace `localhost/fedora:44` with ` ghcr.io/josemiguelo/fedora:44`
 
-3. start using the box:
+3. start using the box (wherever this repo was cloned at):
 
 ```bash
-distrobox enter boxkit-fedora
+SHELL=/bin/zsh distrobox assemble create && distrobox enter boxkit-fedora
 ```
 
 4. pull down dotfiles if you enter the box for the first time. Execute this *inside* the box:
@@ -48,6 +47,8 @@ setup-dotfiles.sh
 
 This will:
 1. download and set up chezmoi dotfiles
-2. install asdf plugins and tools
+2. install asdf-vm plugins and tools
+3. download and install Fira Code fonts
+4. export several apps to the host
 
 By default, it will install all tools defined in [~/.tool-versions](https://github.com/josemiguelo/.dotfiles/blob/master/dot_tool-versions). If no tool is wanted to be installed, pass the env var `NO_ASDF_TOOL_INSTALLATION=true`. If you want to install just some of those tools, pass `ASDF_TOOL_LIST="golang ruby ..."`. 
