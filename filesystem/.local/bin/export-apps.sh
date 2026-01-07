@@ -3,4 +3,5 @@
 set -ouex pipefail
 
 distrobox-export --app wezterm
-# distrobox-export --app code
+distrobox-export --app antigravity
+distrobox-export --app code

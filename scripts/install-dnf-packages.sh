@@ -74,11 +74,25 @@ dnf5 install -y https://github.com/wezterm/wezterm/releases/download/20240203-11
 ############
 ## VSCODE ##
 ############
-# rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
-#   echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" |
-#   sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
-#
-# dnf5 install -y code
+rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+  echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" |
+  tee /etc/yum.repos.d/vscode.repo >/dev/null
+      
+dnf5 install -y code
+
+#################
+## ANTIGRAVITY ##
+#################
+tee /etc/yum.repos.d/antigravity.repo <<EOF
+[antigravity-rpm]
+name=Antigravity RPM Repository
+baseurl=https://us-central1-yum.pkg.dev/projects/antigravity-auto-updater-dev/antigravity-rpm
+enabled=1
+gpgcheck=0
+EOF
+
+dnf5 makecache
+dnf5 install -y antigravity
 
 ## clean everything ......
 dnf5 clean all
