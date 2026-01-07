@@ -49,6 +49,7 @@ CLI_PACKAGES=(
   "fd-find"
   "trash-cli"
   "vim"
+  "tree-sitter-cli"
 )
 echo "Installing cli packages ${#CLI_PACKAGES[@]} ..."
 dnf5 install -y "${CLI_PACKAGES[@]}"
