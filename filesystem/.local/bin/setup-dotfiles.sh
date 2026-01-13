@@ -7,3 +7,4 @@ set -ouex pipefail
 . install-fonts.sh
 . export-apps.sh
 . setup-asdf.sh
+. setup-ngrok.sh
