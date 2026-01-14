@@ -2,20 +2,20 @@ FROM quay.io/fedora/fedora-toolbox:43
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
-      summary="My custom image for distrobox" \
+      summary="My custom image for distrobox general development" \
       maintainer="josemiguelo.ochoa@gmail.com"
 
 # temp assets
-COPY ../scripts/ /tmp/scripts/
+COPY ../scripts/fedora-dev/ /tmp/scripts/
 
 # copy all user local bins
 RUN mkdir -p /etc/skel/.local/bin
-COPY ../filesystem/.local/bin/ /etc/skel/.local/bin/
+COPY ../filesystem/fedora-dev/.local/bin/ /etc/skel/.local/bin/
 RUN chmod +x /etc/skel/.local/bin/*.sh
 RUN chmod -R 755 /etc/skel/.local
 
 # copy zsh barebones config
-COPY ../filesystem/.zshenv /etc/skel/.zshenv
+COPY ../filesystem/fedora-dev/.zshenv /etc/skel/.zshenv
 
 RUN chmod +x /tmp/scripts/*.sh && \
     /tmp/scripts/fedora.sh && \

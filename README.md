@@ -1,39 +1,45 @@
-# my custom distrobox image
+# my distrobox images
 
-This is my custom fedora image for development purposes on [distrobox](https://distrobox.it/). It contains the packages I need for software development.
+This are my custom images for development purposes on [distrobox](https://distrobox.it/). It contains the packages I need for general and specific software development.
 
-## Setting up the box on a new machine
+## Signing the image
+
+[Here](https://github.com/ublue-os/boxkit?tab=readme-ov-file#signing-your-images)
+
+## fedora-dev
+
+### Setting up the box on a new machine
 ```bash
-mkdir -p ~/Distroboxes/boxkit-fedora
+mkdir -p ~/Distroboxes/fedora-dev
 
 SHELL=/bin/zsh distrobox create \
--i ghcr.io/josemiguelo/fedora:43 \
--n boxkit-fedora \
---home ~/Distroboxes/boxkit-fedora \
+-i ghcr.io/josemiguelo/fedora-dev:43 \
+-n fedora-dev \
+--home ~/Distroboxes/fedora-dev \
 --additional-flags "--env SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket"
 ```
 
-## Building the distrobox locally:
+### Building the distrobox locally:
 
 1. Clone this repo.
 
 2. build the box (at the root of this folder):
 
 ```bash
-podman build -t localhost/fedora:43 -f ./ContainerFiles/fedora .
+podman build -t localhost/fedora-dev:43 -f ./ContainerFiles/fedora-dev .
 ```
 
 3. create the box:
 
 ```bash
-sudo rm -rf ~/Distroboxes/boxkit-fedora/ ; \
-distrobox stop boxkit-fedora -Y ; \
-distrobox rm boxkit-fedora -f
+sudo rm -rf ~/Distroboxes/fedora-dev/ ; \
+distrobox stop fedora-dev -Y ; \
+distrobox rm fedora-dev -f
 
-SHELL=/bin/zsh distrobox assemble create && distrobox enter boxkit-fedora
+SHELL=/bin/zsh distrobox assemble create --file fedora-dev.ini && distrobox enter fedora-dev
 ```
 
-## set up dotfiles if you enter the box for the first time. Execute this *inside* the box:
+### set up dotfiles if you enter the box for the first time. Execute this *inside* the box:
 
 ```bash
 setup-dotfiles.sh
@@ -56,7 +62,3 @@ If you want to install just some of those tools, pass `ASDF_TOOL_LIST="golang ru
 ```bash
 ASDF_TOOL_LIST="golang ruby" setup-dotfiles.sh
 ```
-
-## Signing the image
-
-[Here](https://github.com/ublue-os/boxkit?tab=readme-ov-file#signing-your-images)
