@@ -65,4 +65,6 @@ else
   echo "Installing all tools from ~/.tool-versions"
   export CFLAGS="-std=gnu11 -Wno-error=incompatible-pointer-types" # avoid error on older python versions
   asdf install
+
+  (cd ~/.local/share/chezmoi && git remote set-url origin git@github.com:josemiguelo/.dotfiles.git)
 fi
