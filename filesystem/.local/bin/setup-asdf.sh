@@ -63,5 +63,6 @@ elif [[ -n "${ASDF_TOOL_LIST:-}" ]]; then
   done
 else
   echo "Installing all tools from ~/.tool-versions"
+  export CFLAGS="-std=gnu11 -Wno-error=incompatible-pointer-types" # avoid error on older python versions
   asdf install
 fi
