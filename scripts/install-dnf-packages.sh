@@ -54,12 +54,14 @@ CLI_PACKAGES=(
 echo "Installing cli packages ${#CLI_PACKAGES[@]} ..."
 dnf5 install -y "${CLI_PACKAGES[@]}"
 
+dnf5 install -y 'dnf-command(copr)'
+
+sudo dnf5 install -y python3-pip
+
 ##############
 ## STARSHIP ##
 ##############
-dnf5 install -y 'dnf-command(copr)' &&
-  dnf5 copr enable -y atim/starship &&
-  dnf5 install -y starship
+dnf5 copr enable -y atim/starship && dnf5 install -y starship
 
 ##########
 ## YAZI ##
@@ -91,7 +93,6 @@ baseurl=https://us-central1-yum.pkg.dev/projects/antigravity-auto-updater-dev/an
 enabled=1
 gpgcheck=0
 EOF
-
 dnf5 makecache
 dnf5 install -y antigravity
 
