@@ -9,7 +9,8 @@ mkdir -p ~/Distroboxes/boxkit-fedora
 SHELL=/bin/zsh distrobox create \
 -i ghcr.io/josemiguelo/fedora:43 \
 -n boxkit-fedora \
---home ~/Distroboxes/boxkit-fedora
+--home ~/Distroboxes/boxkit-fedora \
+--additional-flags "--env SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket"
 ```
 
 ## Building the distrobox locally:
