@@ -1,0 +1,22 @@
+FROM quay.io/toolbx/ubuntu-toolbox
+
+LABEL com.github.containers.toolbox="true" \
+      usage="This image is meant to be used with the toolbox or distrobox command" \
+      summary="My custom image for qmk development" \
+      maintainer="josemiguelo.ochoa@gmail.com"
+
+# temp assets
+COPY scripts/ubuntu-qmk/ /tmp/scripts/
+
+# copy all user local bins
+RUN mkdir -p /etc/skel/.local/bin
+COPY filesystem/ubuntu-qmk/.local/bin/ /etc/skel/.local/bin/
+RUN chmod +x /etc/skel/.local/bin/*.sh
+RUN chmod -R 755 /etc/skel/.local
+
+# copy zsh barebones config
+COPY filesystem/ubuntu-qmk/.zshenv /etc/skel/.zshenv
+
+RUN chmod +x /tmp/scripts/*.sh && \
+    /tmp/scripts/ubuntu.sh && \
+    rm -rf /tmp/scripts /tmp/packages
