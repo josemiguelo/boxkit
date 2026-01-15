@@ -16,8 +16,8 @@ RUN chmod +x /etc/skel/.local/bin/*.sh
 RUN chmod -R 755 /etc/skel/.local
 
 # copy zsh barebones config
-COPY filesystem/ubuntu-qmk/.zshenv /etc/skel/.zshenv
+COPY filesystem/.zshenv /etc/skel/.zshenv
 
-RUN chmod +x /tmp/scripts/*.sh && \
-    /tmp/scripts/ubuntu.sh && \
-    rm -rf /tmp/scripts /tmp/packages
+RUN chmod +x /tmp/scripts/*.sh 
+RUN /tmp/scripts/ubuntu.sh
+RUN rm -rf /tmp/scripts /tmp/packages
