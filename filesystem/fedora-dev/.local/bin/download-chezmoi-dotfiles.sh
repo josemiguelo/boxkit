@@ -7,7 +7,7 @@ if [ ! -d "$HOME/.local/share/chezmoi" ]; then
   sudo chown -R $USER:$USER "$HOME/.local"
   chezmoi init --apply --verbose --force https://github.com/josemiguelo/.dotfiles.git
 
-  echo "return { color_scheme = 'Tokyo Night Day' }" >"$HOME/.config/wezterm/private.lua"
+  echo "return { color_scheme = 'Tokyo Night' }" >"$HOME/.config/wezterm/private.lua"
 else
   echo "🚀 Dotfiles have already been initialized!"
 fi
