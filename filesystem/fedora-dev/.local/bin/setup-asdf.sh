@@ -54,6 +54,8 @@ echo "🚀 installed asdf-plugin-manager version $($PLUGIN_MANAGER version)"
 
 $PLUGIN_MANAGER add-all
 
+export CFLAGS="-std=gnu11 -Wno-error=incompatible-pointer-types" # avoid error on older python versions
+
 if [[ "${NO_ASDF_TOOL_INSTALLATION:-}" == "true" ]]; then
   echo "Skipping asdf tools installation."
 elif [[ -n "${ASDF_TOOL_LIST:-}" ]]; then
@@ -63,8 +65,7 @@ elif [[ -n "${ASDF_TOOL_LIST:-}" ]]; then
   done
 else
   echo "Installing all tools from ~/.tool-versions"
-  export CFLAGS="-std=gnu11 -Wno-error=incompatible-pointer-types" # avoid error on older python versions
   asdf install
-
-  (cd ~/.local/share/chezmoi && git remote set-url origin git@github.com:josemiguelo/.dotfiles.git)
 fi
+
+(cd ~/.local/share/chezmoi && git remote set-url origin git@github.com:josemiguelo/.dotfiles.git)
