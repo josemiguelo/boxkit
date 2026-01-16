@@ -134,3 +134,7 @@ After that, exit the distrobox and enter it again. Then execute:
 This will setup qmk on the distrobox
 
 </details>
+
+### Todos
+
+- add ~/.zshenv to ubuntu-qmk
