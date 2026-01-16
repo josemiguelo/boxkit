@@ -10,6 +10,7 @@ COPY scripts/fedora-dev/ /tmp/scripts/
 
 # copy all user local bins
 RUN mkdir -p /etc/skel/.local/bin
+COPY filesystem/global/.local/bin/ /etc/skel/.local/bin/
 COPY filesystem/fedora-dev/.local/bin/ /etc/skel/.local/bin/
 RUN chmod +x /etc/skel/.local/bin/*.sh
 RUN chmod -R 755 /etc/skel/.local
@@ -17,6 +18,6 @@ RUN chmod -R 755 /etc/skel/.local
 # copy zsh barebones config
 COPY filesystem/fedora-dev/.zshenv /etc/skel/.zshenv
 
-RUN chmod +x /tmp/scripts/*.sh && \
-    /tmp/scripts/fedora.sh && \
-    rm -rf /tmp/scripts /tmp/packages
+RUN chmod +x /tmp/scripts/*.sh 
+RUN /tmp/scripts/fedora.sh
+RUN rm -rf /tmp/scripts /tmp/packages

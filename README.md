@@ -41,7 +41,7 @@ sudo rm -rf ~/Distroboxes/fedora-dev/ ; \
 distrobox stop fedora-dev -Y ; \
 distrobox rm fedora-dev -f
 
-SHELL=/bin/zsh distrobox assemble create --file fedora-dev.ini && distrobox enter fedora-dev
+distrobox assemble create --file fedora-dev.ini && distrobox enter fedora-dev
 ```
 
 ### Setting up dotfiles
@@ -77,7 +77,7 @@ ASDF_TOOL_LIST="golang ruby" setup-dotfiles.sh
 
 <summary>ubuntu-qmk</summary>
 
-## fedora-dev
+## ubuntu-qmk
 
 ### Setting up the box on a new machine
 
