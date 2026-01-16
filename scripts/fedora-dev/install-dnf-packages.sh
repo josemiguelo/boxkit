@@ -27,6 +27,7 @@ DEV_PACKAGES=(
   "ncurses-devel"
   "perl-FindBin"
   "git-delta"
+  "tmux"
 )
 echo "Installing dev packages ${#DEV_PACKAGES[@]} ..."
 dnf5 install -y "${DEV_PACKAGES[@]}"
