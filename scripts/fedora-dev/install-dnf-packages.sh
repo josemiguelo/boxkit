@@ -26,6 +26,7 @@ DEV_PACKAGES=(
   "gdbm-devel"
   "ncurses-devel"
   "perl-FindBin"
+  "git-delta"
 )
 echo "Installing dev packages ${#DEV_PACKAGES[@]} ..."
 dnf5 install -y "${DEV_PACKAGES[@]}"
