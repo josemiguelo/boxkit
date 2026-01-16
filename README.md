@@ -6,9 +6,14 @@ This are my custom images for development purposes on [distrobox](https://distro
 
 [Here](https://github.com/ublue-os/boxkit?tab=readme-ov-file#signing-your-images)
 
+<details>
+
+<summary>fedora-dev</summary>
+
 ## fedora-dev
 
 ### Setting up the box on a new machine
+
 ```bash
 mkdir -p ~/Distroboxes/fedora-dev
 
@@ -39,7 +44,9 @@ distrobox rm fedora-dev -f
 SHELL=/bin/zsh distrobox assemble create --file fedora-dev.ini && distrobox enter fedora-dev
 ```
 
-### set up dotfiles if you enter the box for the first time. Execute this *inside* the box:
+### Setting up dotfiles
+
+if you enter the box for the first time. Execute this *inside* the box:
 
 ```bash
 setup-dotfiles.sh
@@ -62,3 +69,66 @@ If you want to install just some of those tools, pass `ASDF_TOOL_LIST="golang ru
 ```bash
 ASDF_TOOL_LIST="golang ruby" setup-dotfiles.sh
 ```
+
+</details>
+
+
+<details>
+
+<summary>ubuntu-qmk</summary>
+
+## fedora-dev
+
+### Setting up the box on a new machine
+
+```bash
+mkdir -p ~/Distroboxes/ubuntu-qmk
+
+SHELL=/bin/zsh distrobox create \
+-i ghcr.io/josemiguelo/ubuntu-qmk:24.04 \
+-n ubuntu-qmk \
+--home ~/Distroboxes/ubuntu-qmk \
+--additional-flags "--env SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket"
+```
+
+### Building the distrobox locally:
+
+1. Clone this repo.
+
+2. build the box (at the root of this folder):
+
+```bash
+podman build -t localhost/ubuntu-qmk:24.04 -f ./ContainerFiles/ubuntu-qmk  .
+```
+
+3. create the box:
+
+```bash
+sudo rm -rf ~/Distroboxes/ubuntu-qmk ; \
+distrobox stop ubuntu-qmk -Y ; \
+distrobox rm ubuntu-qmk -f
+
+distrobox assemble create --file ubuntu-qmk.ini && distrobox enter ubuntu-qmk
+```
+
+### Setting up dotfiles
+
+if you enter the box for the first time. Execute this *inside* the box:
+
+```bash
+~/.local/bin/setup-dotfiles.sh
+```
+
+This will:
+1. download and set up chezmoi dotfiles
+2. install asdf-vm plugins and tools
+
+After that, exit the distrobox and enter it again. Then execute:
+
+```bash
+~/.local/bin/setup-qmk.sh
+  ```
+
+This will setup qmk on the distrobox
+
+</details>
