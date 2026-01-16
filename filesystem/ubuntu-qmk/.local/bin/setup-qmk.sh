@@ -11,11 +11,12 @@ cd "$HOME/qmk_firmware"
 
 git remote set-url origin git@github.com:josemiguelo/qmk_firmware.git
 
-git fetch origin jm:jm
+GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new" git fetch origin jm:jm
 git checkout jm
 git submodule update --init --recursive
 
 qmk config user.keyboard=bastardkb/charybdis/4x6_trackball_left/v2/splinky_3
 qmk config user.keymap=jm
+qmk doctor
 
 sudo cp ./util/udev/50-qmk.rules /etc/udev/rules.d/

@@ -17,11 +17,12 @@ This are my custom images for development purposes on [distrobox](https://distro
 ```bash
 mkdir -p ~/Distroboxes/fedora-dev
 
-SHELL=/bin/zsh distrobox create \
--i ghcr.io/josemiguelo/fedora-dev:43 \
+distrobox create \
+-i ghcr.io/josemiguelo/fedora-dev:boxkit \
 -n fedora-dev \
 --home ~/Distroboxes/fedora-dev \
---additional-flags "--env SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket"
+--additional-flags "--env SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket" \
+--pre-init-hooks "export SHELL=/bin/zsh;"
 ```
 
 ### Building the distrobox locally:
@@ -31,7 +32,7 @@ SHELL=/bin/zsh distrobox create \
 2. build the box (at the root of this folder):
 
 ```bash
-podman build -t localhost/fedora-dev:43 -f ./ContainerFiles/fedora-dev .
+podman build -t localhost/fedora-dev:boxkit -f ./ContainerFiles/fedora-dev .
 ```
 
 3. create the box:
@@ -84,11 +85,12 @@ ASDF_TOOL_LIST="golang ruby" setup-dotfiles.sh
 ```bash
 mkdir -p ~/Distroboxes/ubuntu-qmk
 
-SHELL=/bin/zsh distrobox create \
--i ghcr.io/josemiguelo/ubuntu-qmk:24.04 \
+distrobox create \
+-i ghcr.io/josemiguelo/ubuntu-qmk:boxkit \
 -n ubuntu-qmk \
 --home ~/Distroboxes/ubuntu-qmk \
---additional-flags "--env SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket"
+--additional-flags "--env SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket" \
+--pre-init-hooks "export SHELL=/bin/zsh;"
 ```
 
 ### Building the distrobox locally:
@@ -98,7 +100,7 @@ SHELL=/bin/zsh distrobox create \
 2. build the box (at the root of this folder):
 
 ```bash
-podman build -t localhost/ubuntu-qmk:24.04 -f ./ContainerFiles/ubuntu-qmk  .
+podman build -t localhost/ubuntu-qmk:boxkit -f ./ContainerFiles/ubuntu-qmk  .
 ```
 
 3. create the box:
